@@ -1,0 +1,63 @@
+@font-face {
+  src:url('fonts/antoniellie.ttf');
+  font-family: antoniellie;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary-color: #d30a0a;
+  --coffee-white: #fcefef;
+}
+
+.header {
+  align-items: center;
+  background-color: var(--primary-color);
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.header__title {
+  font-size: 40px;
+  font-family: antoniellie;
+  color: var(--coffee-white);
+}
+
+.coffee__title {
+  font-size: 30px;
+  font-family: antoniellie;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.coffee-list {
+  height: calc(50vh - 80px);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.coffee-map {
+  height: calc(50vh - 80px);
+  background-color: gray;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+
+@media (min-width:768px) {
+  .coffee {
+    display: flex;
+  }
+
+  .coffee-list,
+  .coffee-map {
+    height: calc(100vh - 160px);
+    width: 50%;
+    padding: 40px;
+  }
+}

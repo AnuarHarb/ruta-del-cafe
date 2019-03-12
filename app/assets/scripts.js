@@ -1,5 +1,5 @@
 const lista = document.querySelector('.list');
-const sortButtons = document.querySelectorAll('.sort-button');
+const coffeeMap = document.querySelector('.coffee-map');
 const cafesApi = 'http://localhost:3000';
 
 function callApi(apiUrl) {
@@ -8,47 +8,7 @@ function callApi(apiUrl) {
     .then(resp => {
       console.log(resp)
       printList(resp.restaurantes);
-      activateButtons(resp.restaurantes);
     });
-}
-
-function activateButtons(cafes) {
-  for(let button of sortButtons) {
-    button.addEventListener('click', function(event) {
-      const sortValue = event.target.getAttribute('data-sort');
-      if(sortValue == 'alpha') {
-        alphabeticalSort(cafes);
-      } else {
-        ratingSort(cafes)
-      }
-    })
-  }
-}
-
-function alphabeticalSort(cafes) {
-  cafes.sort(function(a, b){
-    if (a.nombre > b.nombre) {
-      return 1;
-    }
-    if (a.nombre < b.nombre) {
-      return -1;
-    }
-  });
-  printList(cafes);
-  console.log('alphabético', cafes);
-}
-
-function ratingSort(cafes) {
-  cafes.sort(function(a, b){
-    if (a.rating < b.rating) {
-      return 1;
-    }
-    if (a.rating > b.rating) {
-      return -1;
-    }
-  });
-  printList(cafes);
-  console.log('rating', cafes);
 }
 
 function printList(cafes) {
@@ -57,7 +17,32 @@ function printList(cafes) {
     lista.innerHTML += `
       <li>${cafe.nombre} - ${cafe.rating}</li>
     `
+    let marker = new google.maps.Marker({
+      position: { lat: cafe.lat, lng:cafe.lng },
+      map: condesaMap,
+      name: cafe.name
+    });
   }
 }
 
-callApi(cafesApi);
+let condesaMap;
+let condesa = { lat: 19.4153363 , lng:-99.1733391 }
+
+function initMap() {
+  condesaMap = new google.maps.Map(coffeeMap, {
+    center: condesa, zoom: 16
+  });
+  callApi(cafesApi);
+}
+
+
+
+
+
+
+
+
+
+
+
+//
