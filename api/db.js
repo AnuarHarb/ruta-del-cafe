@@ -41,6 +41,6 @@ module.exports = {
       lat: 19.4103696,
       lng: -99.1790082,
       rating: 4
-    },
+    }
   ]
 }
